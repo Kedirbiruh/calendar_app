@@ -4,7 +4,6 @@ import 'package:kalender_app/widgets/calendar_header.dart';
 import 'package:kalender_app/widgets/day.selectable.dart';
 import 'package:kalender_app/widgets/weekday_row.dart';
 
-
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key, required this.title});
 
@@ -39,10 +38,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
     for (var week in weeks) {
       for (var day in week) {
         bool isCurrentMonth = day.month == currentDate.month;
-        dayWidgets.add(DaySelectable(
-          dayNumber: day.day,
-          isCurrentMonth: isCurrentMonth,
-        ));
+        dayWidgets.add(
+          DaySelectable(date: day, isCurrentMonth: isCurrentMonth),
+        );
       }
     }
 
@@ -65,10 +63,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
           // Grid für die Tage
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 7,
-              children: dayWidgets,
-            ),
+            child: GridView.count(crossAxisCount: 7, children: dayWidgets),
           ),
         ],
       ),
