@@ -1,16 +1,17 @@
-import 'package: flutter/material.dart ';
+import 'package:flutter/material.dart';
+
 class WeekdayRow extends StatelessWidget {
   const WeekdayRow({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final weekdays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'S0'];
+    final weekdays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
     List<Widget> weekdayWidgets = [];
 
     for (var day in weekdays) {
-      weekdayWidgets.add (
+      weekdayWidgets.add(
         Expanded(
-          child: center(
+          child: Center(
             child: Text(
               day,
               style: const TextStyle(fontWeight: FontWeight.bold),

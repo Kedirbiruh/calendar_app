@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kalender_app/date_functions.dart';
 import 'package:kalender_app/widgets/calendar_header.dart';
 import 'package:kalender_app/widgets/day.selectable.dart';
-import 'package:kalender_app/widgets/weekday.row.dart';
+import 'package:kalender_app/widgets/weekday_row.dart';
 
 
 class CalendarScreen extends StatefulWidget {

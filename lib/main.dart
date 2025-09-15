@@ -13,7 +13,7 @@ class CalendarApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mein Kalender',
-      home: CalendarScreen(title: 'Calendar App'),
+      home: CalendarScreen(title: 'My Calendar'),
     );
   }
 }
