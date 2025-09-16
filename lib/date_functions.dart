@@ -1,14 +1,23 @@
-
 class DateFunctions {
   static const List<String> monthNames = [
-    "Januar", "Februar", "März", "April", "Mai", "Juni",
-    "Juli", "August", "September", "Oktober", "November", "Dezember"
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
   ];
 
   static String monthName(DateTime date) {
-  return "${monthNames[date.month - 1]} ${date.year}";
-}
-  
+    return "${monthNames[date.month - 1]} ${date.year}";
+  }
+
   static List<List<DateTime>> buildMonth(int year, int month) {
     final firstDay = DateTime(year, month, 1);
     final daysOfLastMonth = (firstDay.weekday + 6) % 7;
@@ -19,9 +28,11 @@ class DateFunctions {
 
     final weeks = <List<DateTime>>[];
     var currentWeek = <DateTime>[];
-    for (var day = startDay;
-        !day.isAfter(endDay);
-        day = day.add(const Duration(days: 1))) {
+    for (
+      var day = startDay;
+      !day.isAfter(endDay);
+      day = day.add(const Duration(days: 1))
+    ) {
       currentWeek.add(day);
 
       if (day.weekday == DateTime.sunday) {
@@ -29,10 +40,9 @@ class DateFunctions {
         currentWeek = [];
       }
     }
-
+    if (currentWeek.isNotEmpty) {
+      weeks.add(currentWeek);
+    }
     return weeks;
   }
-
 }
-
-
