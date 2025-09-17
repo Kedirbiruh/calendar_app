@@ -15,27 +15,25 @@ class DaySelectable extends StatelessWidget {
     required this.isCurrentMonth,
     this.birthday,
     this.onDateSelected,
-  }); 
+  });
 
   bool isToday() {
     return date.year == now.year &&
-      date.month == now.month &&
+        date.month == now.month &&
         date.day == now.day;
-      
   }
-
 
   bool isSaturday() {
     return date.weekday == DateTime.saturday;
   }
-  
+
   bool isSunday() {
     return date.weekday == DateTime.sunday;
   }
 
   bool isAndreBirthday(month, day) {
     return month == 8 && day == 6;
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,16 +42,16 @@ class DaySelectable extends StatelessWidget {
     final holiday = holidayController.getHolidayForDate(date);
 
     if (isToday()) {
-    background = const Color.fromARGB(255, 160, 228, 233);
+      background = const Color.fromARGB(255, 160, 228, 233);
     } else if (isAndreBirthday(date.month, date.day)) {
-    background = const Color.fromARGB(230, 193, 223, 197);
+      background = const Color.fromARGB(230, 193, 223, 197);
     } else if (!isCurrentMonth) {
-    background = const Color.fromARGB(0, 228, 225, 225);
-    textColor = const Color.fromARGB(255, 175, 175, 175);
+      background = const Color.fromARGB(0, 228, 225, 225);
+      textColor = const Color.fromARGB(255, 175, 175, 175);
     } else if (isSaturday()) {
-    background = const Color.fromARGB(255, 198, 197, 226);
-    }else if (isSunday()) {
-    background = const Color.fromARGB(255, 221, 178, 178);
+      background = const Color.fromARGB(255, 198, 197, 226);
+    } else if (isSunday()) {
+      background = const Color.fromARGB(255, 221, 178, 178);
     }
     if (holiday != null) {
       background = const Color.fromARGB(255, 156, 235, 10);
@@ -71,10 +69,12 @@ class DaySelectable extends StatelessWidget {
           color: background,
         ),
         child: Center(
-          child: Text("${date.day}", style: TextStyle(fontSize: 16, color: textColor)),
+          child: Text(
+            "${date.day}",
+            style: TextStyle(fontSize: 16, color: textColor),
+          ),
         ),
       ),
     );
   }
 }
-

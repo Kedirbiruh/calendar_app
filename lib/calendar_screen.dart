@@ -19,6 +19,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime selectedDate = DateTime.now();
   HolidayController holidayController = HolidayController();
 
+  String formatDate(DateTime date) {
+    return "${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}";
+  }
+
   // Info_Box Variablen
   String weekdayName = "";
   String nthWeekday = "";
@@ -146,7 +150,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Der ${selectedDate.day}.${selectedDate.month}.${selectedDate.year} " 
+                  "Der ${formatDate(selectedDate)} " 
                   "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
                   "des Jahres ${DateFunctions.onlyYear(selectedDate)}."
                   "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage." "Heute ist $holidayName",
