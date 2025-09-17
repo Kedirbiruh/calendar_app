@@ -7,7 +7,6 @@ import 'package:kalender_app/widgets/weekday_row.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key, required this.title});
-
   final String title;
 
   @override
@@ -23,6 +22,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return "${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}";
   }
 
+  DateTime normalizeDate(DateTime date) {
+    return DateTime(date.year, date.month, date.day);
+  }
+
   // Info_Box Variablen
   String weekdayName = "";
   String nthWeekday = "";
@@ -31,11 +34,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   int daysInMonth = 0;
 
   @override
-  void initState() {
-    super.initState();
-    _updateInfoBox(selectedDate);
-  }
-
+  
   void previousMonth() {
     setState(() {
       currentDate = DateTime(currentDate.year, currentDate.month - 1, 1);
@@ -46,6 +45,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
     setState(() {
       currentDate = DateTime(currentDate.year, currentDate.month + 1, 1);
     });
+  }
+
+  void initState() {
+    super.initState();
+    _updateInfoBox(selectedDate);
   }
 
   void _updateInfoBox(DateTime date) {
@@ -103,10 +107,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
     List<Widget> dayWidgets = [];
     for (var week in weeks) {
       for (var day in week) {
+        // print("Day: ${day.year}-${day.month}-${day.day}");
         bool isCurrentMonth = day.month == currentDate.month;
         dayWidgets.add(
           DaySelectable(
-            date: day,
+            date: normalizeDate(day),
             isCurrentMonth: isCurrentMonth,
             onDateSelected: (selectedDay) {
               _updateInfoBox(selectedDay);
@@ -123,22 +128,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       body: Column(
         children: [
-          // Header mit Monatsname und Navigation
           CalendarHeader(
             currentDate: currentDate,
             onPreviousMonth: previousMonth,
             onNextMonth: nextMonth,
           ),
-
-          // Wochentagsreihe
           const WeekdayRow(),
-
-          // Grid für die Tage
           Expanded(
             child: GridView.count(crossAxisCount: 7, children: dayWidgets),
           ),
-
-          // Info-Box
+          // InfoBox
           Container(
             padding: const EdgeInsets.all(12),
             margin: const EdgeInsets.all(8),
@@ -150,13 +149,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Der ${formatDate(selectedDate)} " 
+                  "Der ${formatDate(selectedDate)} "
                   "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
                   "des Jahres ${DateFunctions.onlyYear(selectedDate)}."
-                  "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage." "Heute ist $holidayName",
+                  "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage."
+                  "Heute ist $holidayName",
                   style: const TextStyle(fontSize: 14),
                 ),
-                
               ],
             ),
           ),
