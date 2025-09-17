@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:kalender_app/controllers/holiday_controller.dart';
 
 class DaySelectable extends StatelessWidget {
   final DateTime date;
   final bool isCurrentMonth;
   final DateTime? birthday;
   final now = DateTime.now();
-  
-  
+  final Function(DateTime)? onDateSelected;
+  final HolidayController holidayController = HolidayController();
 
   DaySelectable({
     super.key,
     required this.date,
     required this.isCurrentMonth,
     this.birthday,
-  });
+    this.onDateSelected,
+  }); 
 
   bool isToday() {
     return date.year == now.year &&
@@ -39,6 +41,7 @@ class DaySelectable extends StatelessWidget {
   Widget build(BuildContext context) {
     Color background = const Color.fromARGB(255, 238, 236, 236);
     Color textColor = Colors.black;
+    final holiday = holidayController.getHolidayForDate(date);
 
     if (isToday()) {
     background = const Color.fromARGB(255, 160, 228, 233);
@@ -52,9 +55,13 @@ class DaySelectable extends StatelessWidget {
     }else if (isSunday()) {
     background = const Color.fromARGB(255, 221, 178, 178);
     }
+    if (holiday != null) {
+      background = const Color.fromARGB(255, 156, 235, 10);
+    }
 
     return InkWell(
       onTap: () {
+        if (onDateSelected != null) onDateSelected!(date);
         print("Tag ${date.day} geklickt");
       },
       child: Container(
@@ -71,6 +78,3 @@ class DaySelectable extends StatelessWidget {
   }
 }
 
-
-
- 
