@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kalender_app/controllers/holiday_controller.dart';
 import 'package:kalender_app/date_functions.dart';
+import 'package:kalender_app/widgets/weekday_row.dart';
 import 'package:kalender_app/widgets/calendar_header.dart';
 import 'package:kalender_app/widgets/day_selectable.dart';
-import 'package:kalender_app/widgets/weekday_row.dart';
+import 'package:kalender_app/widgets/event_list_widget.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key, required this.title});
@@ -182,28 +183,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Text(
-                            "1. Ereignis..........................................................................................,,,,,,....................,,,,,\n"
-                            "2. Ereignis ...\n"
-                            "3. Ereignis ...\n"
-                            "4. Ereignis ...\n"
-                            "5. Ereignis ...\n"
-                            "6 Ereignis ...\n"
-                            "7. Ereignis ...\n"
-                            "8. Ereignis ...\n"
-                            "9. Ereignis ...\n"
-                            "10. Ereignis ...\n"
-                            "11. Ereignis ...\n"
-                            "12. Ereignis ...\n"
-                            "13. Ereignis ...\n"
-                            "15. Ereignis ...\n"
-                            "16. Ereignis ...",
-                            style: TextStyle(fontSize: 14),
-                          ),
-                        ),
-                      ),
+                      Expanded(child: EventListWidget(date: selectedDate)),
                     ],
                   ),
                 ),
