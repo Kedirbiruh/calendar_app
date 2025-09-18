@@ -17,12 +17,13 @@ class DateFunctions {
   static String monthName(DateTime date) {
     return "${monthNames[date.month - 1]} ${date.year}";
   }
+
   static onlyMonthName(DateTime date) {
     return monthNames[date.month - 1];
-  } 
+  }
+
   static String onlyYear(DateTime date) {
     return "${date.year}";
-    
   }
 
   static List<List<DateTime>> buildMonth(int year, int month) {
@@ -38,10 +39,10 @@ class DateFunctions {
     for (
       var day = startDay;
       !day.isAfter(endDay);
-      day = day.add(const Duration(days: 1))
-    ) {
+      day = DateTime(day.year, day.month, day.day + 1)) {
       currentWeek.add(day);
-
+      print("Day: $day");
+      
       if (day.weekday == DateTime.sunday) {
         weeks.add(currentWeek);
         currentWeek = [];

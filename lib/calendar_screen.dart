@@ -120,6 +120,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           padding: const EdgeInsets.all(12),
           child: Column(
             children: [
+
+            //constrainedBox oder eigene widget.....
               CalendarHeader(
                 currentDate: currentDate,
                 onPreviousMonth: previousMonth,
@@ -136,6 +138,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
               // InfoBox
               Container(
+                width: 500,
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
