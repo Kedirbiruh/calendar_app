@@ -37,12 +37,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
   void previousMonth() {
     setState(() {
       currentDate = DateTime(currentDate.year, currentDate.month - 1, 1);
+      _updateInfoBox(DateTime(currentDate.year, currentDate.month, 1));
     });
   }
 
   void nextMonth() {
     setState(() {
       currentDate = DateTime(currentDate.year, currentDate.month + 1, 1);
+      _updateInfoBox(DateTime(currentDate.year, currentDate.month, 1));
     });
   }
 

@@ -11,6 +11,9 @@ class CalendarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Arial',
+      ),
       debugShowCheckedModeBanner: false,
       title: 'Mein Kalender',
       home: CalendarScreen(title: 'My Calendar'),

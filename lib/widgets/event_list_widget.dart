@@ -37,9 +37,20 @@ class _EventListWidgetState extends State<EventListWidget> {
           itemCount: events.length,
           itemBuilder: (context, index) {
             final event = events[index];
-            return ListTile(title: Text('${event["year"]}: ${event["text"]}', 
-            style: const TextStyle(fontSize: 14),));
-            
+            return ListTile(
+              title: RichText(
+                text: TextSpan(
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: '${event["year"]} ',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(text: event["text"]),
+                  ],
+                ),
+              ),
+            );
           },
         );
       },

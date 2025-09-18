@@ -65,6 +65,9 @@ class DaySelectable extends StatelessWidget {
         if (onDateSelected != null ) onDateSelected!(date);
         print("Tag ${date.day} geklickt");
       },
+      borderRadius: BorderRadius.circular(8),
+      splashColor: Colors.blue.withGreen(1),
+      highlightColor: Colors.blue.withGreen(1),
       child: Container(
         margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
