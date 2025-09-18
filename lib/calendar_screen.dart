@@ -89,6 +89,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     final weeks = DateFunctions.buildMonth(currentDate.year, currentDate.month);
+    final screenHeight = MediaQuery.of(context).size.height;
+    final availableHeight = screenHeight * 0.4;
+    final gridHeight = availableHeight;
+    final rowHeight = gridHeight / 6;
 
     List<Widget> dayWidgets = [];
     for (var week in weeks) {
@@ -120,19 +124,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
           padding: const EdgeInsets.all(12),
           child: Column(
             children: [
-
-            //constrainedBox oder eigene widget.....
+              //constrainedBox oder eigene widget.....
               CalendarHeader(
                 currentDate: currentDate,
                 onPreviousMonth: previousMonth,
                 onNextMonth: nextMonth,
               ),
               const WeekdayRow(),
-              Expanded(
-                flex: 2,
+              SizedBox(
+                height: gridHeight,
                 child: GridView.count(
                   crossAxisCount: 7,
                   physics: const NeverScrollableScrollPhysics(),
+                  childAspectRatio:
+                      (MediaQuery.of(context).size.width / 7) / rowHeight,
+                  padding: EdgeInsets.zero,
                   children: dayWidgets,
                 ),
               ),
@@ -158,9 +164,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     Text(
                       "Der ${formatDate(selectedDate)} "
                       "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
-                      "des Jahres ${DateFunctions.onlyYear(selectedDate)}."
-                      "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage."
-                      "Heute ist $holidayName",
+                      "des Jahres ${DateFunctions.onlyYear(selectedDate)}. "
+                      "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage. "
+                      "Heute ist $holidayName.",
                       style: const TextStyle(fontSize: 14),
                     ),
                   ],

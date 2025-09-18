@@ -55,13 +55,14 @@ class DaySelectable extends StatelessWidget {
     } else if (isSunday()) {
       background = const Color.fromARGB(255, 221, 178, 178);
     }
-    if (holiday != null) {
+    if (holiday != null && isCurrentMonth) {
       background = const Color.fromARGB(255, 156, 235, 10);
+      // textColor = Colors.black;
     }
 
     return InkWell(
       onTap: () {
-        if (onDateSelected != null) onDateSelected!(date);
+        if (onDateSelected != null ) onDateSelected!(date);
         print("Tag ${date.day} geklickt");
       },
       child: Container(
