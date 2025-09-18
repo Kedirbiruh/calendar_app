@@ -38,7 +38,7 @@ class _EventListWidgetState extends State<EventListWidget> {
           itemBuilder: (context, index) {
             final event = events[index];
             return ListTile(title: Text('${event["year"]}: ${event["text"]}', 
-            style: const TextStyle(fontSize: 12),));
+            style: const TextStyle(fontSize: 14),));
             
           },
         );
