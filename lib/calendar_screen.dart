@@ -33,8 +33,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
   String monthName = "";
   int daysInMonth = 0;
 
-  @override
-  
   void previousMonth() {
     setState(() {
       currentDate = DateTime(currentDate.year, currentDate.month - 1, 1);
@@ -47,6 +45,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     });
   }
 
+  @override
   void initState() {
     super.initState();
     _updateInfoBox(selectedDate);
@@ -107,12 +106,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
     List<Widget> dayWidgets = [];
     for (var week in weeks) {
       for (var day in week) {
-        // print("Day: ${day.year}-${day.month}-${day.day}");
         bool isCurrentMonth = day.month == currentDate.month;
         dayWidgets.add(
           DaySelectable(
             date: normalizeDate(day),
             isCurrentMonth: isCurrentMonth,
+            holidayController: holidayController,
             onDateSelected: (selectedDay) {
               _updateInfoBox(selectedDay);
             },
@@ -120,11 +119,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
         );
       }
     }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(248, 171, 197, 194),
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
       ),
       body: Column(
         children: [
@@ -135,7 +136,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ),
           const WeekdayRow(),
           Expanded(
-            child: GridView.count(crossAxisCount: 7, children: dayWidgets),
+            flex: 2,
+            child: GridView.count(
+              crossAxisCount: 7,
+              physics: const NeverScrollableScrollPhysics(),
+              children: dayWidgets,
+            ),
           ),
           // InfoBox
           Container(
@@ -146,8 +152,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  "Info",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Text(
                   "Der ${formatDate(selectedDate)} "
                   "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
@@ -157,6 +170,49 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   style: const TextStyle(fontSize: 14),
                 ),
               ],
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "History on ${formatDate(selectedDate)}",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Text(
+                        "1. Ereignis..........................................................................................,,,,,,....................,,,,,\n"
+                        "2. Ereignis ...\n"
+                        "3. Ereignis ...\n"
+                        "4. Ereignis ...\n"
+                        "5. Ereignis ...\n"
+                        "6 Ereignis ...\n"
+                        "7. Ereignis ...\n"
+                        "8. Ereignis ...\n"
+                        "9. Ereignis ...\n"
+                        "10. Ereignis ...\n"
+                        "11. Ereignis ...\n"
+                        "12. Ereignis ...\n"
+                        "13. Ereignis ...\n"
+                        "15. Ereignis ...\n"
+                        "16. Ereignis ...",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

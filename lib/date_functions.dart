@@ -22,6 +22,7 @@ class DateFunctions {
   } 
   static String onlyYear(DateTime date) {
     return "${date.year}";
+    
   }
 
   static List<List<DateTime>> buildMonth(int year, int month) {

@@ -5,22 +5,24 @@ class DaySelectable extends StatelessWidget {
   final DateTime date;
   final bool isCurrentMonth;
   final DateTime? birthday;
-  final now = DateTime.now();
+  final today = DateTime.now();
+  final HolidayController holidayController;
   final Function(DateTime)? onDateSelected;
-  final HolidayController holidayController = HolidayController();
+
 
   DaySelectable({
     super.key,
     required this.date,
     required this.isCurrentMonth,
+    required this.holidayController,
     this.birthday,
     this.onDateSelected,
   });
 
   bool isToday() {
-    return date.year == now.year &&
-        date.month == now.month &&
-        date.day == now.day;
+    return date.year == today.year &&
+        date.month == today.month &&
+        date.day == today.day;
   }
 
   bool isSaturday() {
