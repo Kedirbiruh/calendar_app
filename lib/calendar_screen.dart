@@ -76,27 +76,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   String getNthWeekdayInMonth(DateTime date) {
-    int count = 0;
-    for (int day = 1; day <= date.day; day++) {
-      if (DateTime(date.year, date.month, day).weekday == date.weekday) {
-        count++;
-      }
-    }
+    final dayOfMonth = date.day;
 
-    switch (count) {
-      case 1:
-        return "erste";
-      case 2:
-        return "zweite";
-      case 3:
-        return "dritte";
-      case 4:
-        return "vierte";
-      case 5:
-        return "fünfte";
-      default:
-        return "";
-    }
+    if (dayOfMonth < 8) return "erste";
+    if (dayOfMonth < 15) return "zweite";
+    if (dayOfMonth < 22) return "dritte";
+    if (dayOfMonth < 29) return "vierte";
+    return "fünfte";
   }
 
   @override
@@ -190,7 +176,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     children: [
                       Text(
                         "History on ${formatDate(selectedDate)}",
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Expanded(
