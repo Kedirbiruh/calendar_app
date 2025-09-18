@@ -24,7 +24,7 @@ class CalendarHeader extends StatelessWidget {
         ),
         Text(
           DateFunctions.monthName(currentDate),
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         IconButton(
           icon: const Icon(Icons.chevron_right),

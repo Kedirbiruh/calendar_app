@@ -127,95 +127,101 @@ class _CalendarScreenState extends State<CalendarScreen> {
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
-      body: Column(
-        children: [
-          CalendarHeader(
-            currentDate: currentDate,
-            onPreviousMonth: previousMonth,
-            onNextMonth: nextMonth,
-          ),
-          const WeekdayRow(),
-          Expanded(
-            flex: 2,
-            child: GridView.count(
-              crossAxisCount: 7,
-              physics: const NeverScrollableScrollPhysics(),
-              children: dayWidgets,
-            ),
-          ),
-          // InfoBox
-          Container(
-            padding: const EdgeInsets.all(12),
-            margin: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              children: [
-                Text(
-                  "Info",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Der ${formatDate(selectedDate)} "
-                  "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
-                  "des Jahres ${DateFunctions.onlyYear(selectedDate)}."
-                  "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage."
-                  "Heute ist $holidayName",
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ],
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                borderRadius: BorderRadius.circular(12),
+      body: Container(
+        color: const Color.fromARGB(255, 198, 235, 200),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            children: [
+              CalendarHeader(
+                currentDate: currentDate,
+                onPreviousMonth: previousMonth,
+                onNextMonth: nextMonth,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "History on ${formatDate(selectedDate)}",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 8),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Text(
-                        "1. Ereignis..........................................................................................,,,,,,....................,,,,,\n"
-                        "2. Ereignis ...\n"
-                        "3. Ereignis ...\n"
-                        "4. Ereignis ...\n"
-                        "5. Ereignis ...\n"
-                        "6 Ereignis ...\n"
-                        "7. Ereignis ...\n"
-                        "8. Ereignis ...\n"
-                        "9. Ereignis ...\n"
-                        "10. Ereignis ...\n"
-                        "11. Ereignis ...\n"
-                        "12. Ereignis ...\n"
-                        "13. Ereignis ...\n"
-                        "15. Ereignis ...\n"
-                        "16. Ereignis ...",
-                        style: TextStyle(fontSize: 14),
+              const WeekdayRow(),
+              Expanded(
+                flex: 2,
+                child: GridView.count(
+                  crossAxisCount: 7,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: dayWidgets,
+                ),
+              ),
+              // InfoBox
+              Container(
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      "Info",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 8),
+                    Text(
+                      "Der ${formatDate(selectedDate)} "
+                      "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
+                      "des Jahres ${DateFunctions.onlyYear(selectedDate)}."
+                      "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage."
+                      "Heute ist $holidayName",
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              Flexible(
+                flex: 1,
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.blue[50],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "History on ${formatDate(selectedDate)}",
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Text(
+                            "1. Ereignis..........................................................................................,,,,,,....................,,,,,\n"
+                            "2. Ereignis ...\n"
+                            "3. Ereignis ...\n"
+                            "4. Ereignis ...\n"
+                            "5. Ereignis ...\n"
+                            "6 Ereignis ...\n"
+                            "7. Ereignis ...\n"
+                            "8. Ereignis ...\n"
+                            "9. Ereignis ...\n"
+                            "10. Ereignis ...\n"
+                            "11. Ereignis ...\n"
+                            "12. Ereignis ...\n"
+                            "13. Ereignis ...\n"
+                            "15. Ereignis ...\n"
+                            "16. Ereignis ...",
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
