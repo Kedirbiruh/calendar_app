@@ -124,65 +124,66 @@ class _CalendarScreenState extends State<CalendarScreen> {
         color: const Color.fromARGB(255, 198, 235, 200),
         child: Padding(
           padding: const EdgeInsets.all(12),
-          child: Column(
-            children: [
-              //constrainedBox oder eigene widget.....
-              CalendarHeader(
-                currentDate: currentDate,
-                onPreviousMonth: previousMonth,
-                onNextMonth: nextMonth,
-              ),
-              const WeekdayRow(),
-              SizedBox(
-                height: gridHeight,
-                child: GridView.count(
-                  crossAxisCount: 7,
-                  physics: const NeverScrollableScrollPhysics(),
-                  childAspectRatio:
-                      (MediaQuery.of(context).size.width / 7) / rowHeight,
-                  padding: EdgeInsets.zero,
-                  children: dayWidgets,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                //constrainedBox oder eigene widget.....
+                CalendarHeader(
+                  currentDate: currentDate,
+                  onPreviousMonth: previousMonth,
+                  onNextMonth: nextMonth,
                 ),
-              ),
-              // InfoBox
-              Container(
-                width: 500,
-                padding: const EdgeInsets.all(12),
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(12),
+                const WeekdayRow(),
+                SizedBox(
+                  height: gridHeight,
+                  child: GridView.count(
+                    crossAxisCount: 7,
+                    physics: const NeverScrollableScrollPhysics(),
+                    childAspectRatio:
+                        (MediaQuery.of(context).size.width / 7) / rowHeight,
+                    padding: EdgeInsets.zero,
+                    children: dayWidgets,
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      "Info",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                // InfoBox
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Info",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      "Der ${formatDate(selectedDate)} "
-                      "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
-                      "des Jahres ${DateFunctions.onlyYear(selectedDate)}. "
-                      "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage. "
-                      "Heute ist ein gesetzlicher Feiertag in Hessen: $holidayName.",
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
+                      const SizedBox(height: 8),
+                      Text(
+                        "Der ${formatDate(selectedDate)} "
+                        "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
+                        "des Jahres ${DateFunctions.onlyYear(selectedDate)}. "
+                        "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage. "
+                        "Heute ist ein gesetzlicher Feiertag in Hessen: $holidayName.",
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Flexible(
-                flex: 1,
-                child: Container(
+                Container(
                   padding: const EdgeInsets.all(12),
                   margin: const EdgeInsets.symmetric(vertical: 8),
                   decoration: BoxDecoration(
                     color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  height: 300,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -194,14 +195,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Expanded(child: EventListWidget(
-                        key: ValueKey(  selectedDate),   //ValueKey sorgt dafür neu zu laden für selexted day
-                        date: selectedDate)),
+                      Expanded(child: ListView(
+                        children: [
+                          EventListWidget(
+                            key: ValueKey(selectedDate),   //ValueKey sorgt dafür neu zu laden für selexted day
+                            date: selectedDate),
+                        ],
+                      )),
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
