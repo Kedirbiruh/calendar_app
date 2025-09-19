@@ -30,7 +30,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   // Info_Box Variablen
   String weekdayName = "";
   String nthWeekday = "";
-  String holidayName = "";
+  String holidayName = "Heute ist ein gesetzlicher Feiertag in Hessen";
   String monthName = "";
   int daysInMonth = 0;
 
@@ -60,7 +60,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       selectedDate = date;
       weekdayName = _getWeekdayGerman(date.weekday);
       nthWeekday = getNthWeekdayInMonth(date);
-      holidayName = holiday?.name ?? 'kein Feiertag';
+      holidayName = holiday?.name ?? 'kein gesetzlicher Feiertag in Hessen';
       daysInMonth = DateTime(date.year, date.month + 1, 0).day;
     });
   }
@@ -168,7 +168,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       "ist ein $weekdayName und zwar der $nthWeekday $weekdayName im Monat ${DateFunctions.onlyMonthName(selectedDate)} "
                       "des Jahres ${DateFunctions.onlyYear(selectedDate)}. "
                       "Dieser ${DateFunctions.onlyMonthName(selectedDate)} hat $daysInMonth Tage. "
-                      "Heute ist $holidayName.",
+                      "Heute ist ein gesetzlicher Feiertag in Hessen: $holidayName.",
                       style: const TextStyle(fontSize: 14),
                     ),
                   ],
@@ -194,7 +194,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Expanded(child: EventListWidget(date: selectedDate)),
+                      Expanded(child: EventListWidget(
+                        key: ValueKey(  selectedDate),   //ValueKey sorgt dafür neu zu laden für selexted day
+                        date: selectedDate)),
                     ],
                   ),
                 ),
